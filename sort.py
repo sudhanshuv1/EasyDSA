@@ -1,8 +1,13 @@
 from utils import getRandomArray
 import sys
 
-
-# Bubble Sort
+'''
+Bubble Sort
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+Stable: Yes
+In-Place: Yes
+'''
 
 def bubbleSort():
     nums = getRandomArray(10, 'int', 0, 100)
@@ -21,8 +26,13 @@ def bubbleSort():
 bubbleSort()
 
 
-
-# Selection Sort
+'''
+Selection Sort
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+Stable: No
+In-Place: Yes
+'''
 
 def selectionSort():
     nums = getRandomArray(10, 'int', 0, 150)
@@ -40,8 +50,13 @@ def selectionSort():
 selectionSort()
 
 
-
-# Insertion Sort
+'''
+Insertion Sort
+Time Complexity: O(n^2)
+Space Complexity: O(1)
+Stable: Yes
+In-Place: Yes
+'''
 
 def insertionSort():
     nums = getRandomArray(10, 'int', 0, 200)
@@ -49,7 +64,8 @@ def insertionSort():
     n = len(nums)
     for i in range(1, n):
         j = i-1
-        number = nums[i]
+        number = nums[i]# Bubble Sort
+
         while j >= 0:
             if nums[j] > number:
                 nums[j+1] = nums[j]
@@ -62,7 +78,13 @@ def insertionSort():
 insertionSort()
 
 
-# Merge Sort
+'''
+Merge Sort
+Time Complexity: O(nlogn)
+Space Complexity: O(n)
+Stable: Yes
+In-Place: No
+'''
 
 def merge(leftHalf, rightHalf):
     i,j=0,0
@@ -99,7 +121,13 @@ def mergeSort():
 mergeSort()
 
 
-# Quick Sort
+'''
+Quick Sort
+Time Complexity: O(nlogn)
+Space Complexity: O(logn)
+Stable: No
+In-Place: Yes
+'''
 
 def partition(nums, start, end):
     pivot = nums[start]
@@ -129,3 +157,42 @@ def quickSort():
     print('Sorted Array: ', nums)
 
 quickSort()
+
+
+'''
+Heap Sort
+Time Complexity: O(nlogn)
+Space Complexity: O(1)
+Stable: No
+In-Place: Yes
+'''
+
+def heapify(nums, n, i):
+    largest = i
+    l = 2*i + 1
+    r = 2*i + 2
+
+    if l < n and nums[largest] < nums[l]:
+        largest = l
+    if r < n and nums[largest] < nums[r]:
+        largest = r
+    
+    if largest != i:
+        nums[i], nums[largest] = nums[largest], nums[i]
+        heapify(nums, n, largest)
+
+def hSort(arr):
+    n = len(arr)
+    for i in range(n//2, -1, -1):
+        heapify(arr, n, i)
+    for i in range(n-1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+def heapSort():
+    nums = getRandomArray(10, 'int', 0, 350)
+    print('************ Heap Sort *************\nUnsorted Array: ', nums)
+    hSort(nums)
+    print('Sorted Array: ', nums)
+
+heapSort()
